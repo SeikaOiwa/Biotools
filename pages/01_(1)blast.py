@@ -162,7 +162,7 @@ def cleanup_data():
     shutil.rmtree(f'{base_path}/検索配列')
     shutil.rmtree(f'{base_path}/Result')
     os.makedirs(f'{base_path}/検索配列')
-    os.makedirs(f'{base_path}/Result')        
+    os.makedirs(f'{base_path}/Result')   
     
 def blastN():
     st.header('BlastNの実行')
@@ -179,11 +179,15 @@ def blastN():
            
     #database infomation
     st.subheader('(2)データベースの選択')  
-    db_name = os.listdir(f'{database_path}/')
+    db_name_ = os.listdir(f'{database_path}/')
+    db_name = [f for f in db_name_  if not f == '.DS_Store']
     st.write('菌株を選択してください')
-    select_db_name = st.selectbox('', db_name[0:])
+    select_db_name = st.selectbox('', db_name)
+    db_types_ = os.listdir(f'{database_path}/{select_db_name}')
+    db_types = [f for f in db_types_ if not f == '.DS_Store']
     st.write('データベースの種類を選択してください')
-    select_db_type = st.radio('', ['genome','gene_list','amino_list'],horizontal=True)
+    select_db_type = st.radio('', db_types,horizontal=True)
+
     #database path
     db_path = f'{database_path}/{select_db_name}/{select_db_type}/gene'
     
@@ -240,8 +244,11 @@ def blastN():
             st.dataframe(df2)
             df2.to_excel(buf := BytesIO(), index=True)
             st.download_button("Download",buf.getvalue(),f"{fname}.xlsx","application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
-            
-    
+
+        # 検索配列の除去    
+        shutil.rmtree(f'{base_path}/検索配列')   
+        os.makedirs(f'{base_path}/検索配列')      
+
 def blastX():
     st.header('blastXの実行')
     st.write('NCBI：https://www.ncbi.nlm.nih.gov/')
@@ -257,11 +264,15 @@ def blastX():
             
     #database infomation
     st.subheader('(2)データベースの選択')  
-    db_name = os.listdir(f'{database_path}/')
+    db_name_ = os.listdir(f'{database_path}/')
+    db_name = [f for f in db_name_  if not f == '.DS_Store']
     st.write('菌株を選択してください')
-    select_db_name = st.selectbox('', db_name[0:])
+    select_db_name = st.selectbox('', db_name)
+    db_types_ = os.listdir(f'{database_path}/{select_db_name}')
+    db_types = [f for f in db_types_ if not f == '.DS_Store']
     st.write('データベースの種類を選択してください')
-    select_db_type = st.radio('', ['amino_list'],horizontal=True)
+    select_db_type = st.radio('', db_types,horizontal=True)
+
     #database path
     db_path = f'{database_path}/{select_db_name}/{select_db_type}/gene'
     
@@ -317,7 +328,10 @@ def blastX():
             st.dataframe(df2)
             df2.to_excel(buf := BytesIO(), index=True)
             st.download_button("Download",buf.getvalue(),f"{fname}.xlsx","application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
-            
+        
+        # 検索配列の除去    
+        shutil.rmtree(f'{base_path}/検索配列')   
+        os.makedirs(f'{base_path}/検索配列')              
         
 def tblastX():
     st.header('tblastXの実行')
@@ -334,11 +348,15 @@ def tblastX():
             
     #database infomation
     st.subheader('(2)データベースの選択')  
-    db_name = os.listdir(f'{database_path}/')
+    db_name_ = os.listdir(f'{database_path}/')
+    db_name = [f for f in db_name_  if not f == '.DS_Store']
     st.write('菌株を選択してください')
-    select_db_name = st.selectbox('', db_name[0:])
+    select_db_name = st.selectbox('', db_name)
+    db_types_ = os.listdir(f'{database_path}/{select_db_name}')
+    db_types = [f for f in db_types_ if not f == '.DS_Store']
     st.write('データベースの種類を選択してください')
-    select_db_type = st.radio('', ['genome','gene_list'],horizontal=True)
+    select_db_type = st.radio('', db_types,horizontal=True)
+
     #database path
     db_path = f'{database_path}/{select_db_name}/{select_db_type}/gene'
     
@@ -395,7 +413,11 @@ def tblastX():
             st.dataframe(df2)
             df2.to_excel(buf := BytesIO(), index=True)
             st.download_button("Download",buf.getvalue(),f"{fname}.xlsx","application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
-    
+
+        # 検索配列の除去    
+        shutil.rmtree(f'{base_path}/検索配列')   
+        os.makedirs(f'{base_path}/検索配列')  
+
 def blastP():
     st.header('blastPの実行')
     st.write('NCBI：https://www.ncbi.nlm.nih.gov/')
@@ -411,11 +433,15 @@ def blastP():
             
     #database infomation
     st.subheader('(2)データベースの選択')  
-    db_name = os.listdir(f'{database_path}/')
+    db_name_ = os.listdir(f'{database_path}/')
+    db_name = [f for f in db_name_  if not f == '.DS_Store']
     st.write('菌株を選択してください')
-    select_db_name = st.selectbox('', db_name[0:])
+    select_db_name = st.selectbox('', db_name)
+    db_types_ = os.listdir(f'{database_path}/{select_db_name}')
+    db_types = [f for f in db_types_ if not f == '.DS_Store']
     st.write('データベースの種類を選択してください')
-    select_db_type = st.radio('', ['amino_list'],horizontal=True)
+    select_db_type = st.radio('', db_types,horizontal=True)
+
     #database path
     db_path = f'{database_path}/{select_db_name}/{select_db_type}/gene'
         
@@ -468,6 +494,10 @@ def blastP():
             df2.to_csv(buf := BytesIO(), index=True)
             st.download_button("Download",buf.getvalue(),f"{fname}.xlsx","application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
 
+        # 検索配列の除去    
+        shutil.rmtree(f'{base_path}/検索配列')   
+        os.makedirs(f'{base_path}/検索配列')  
+
 def primer():
     st.header('primer相同領域検索')
     #sequence information     
@@ -482,11 +512,17 @@ def primer():
            
     #database infomation
     st.subheader('(2)データベースの選択')  
-    db_name = os.listdir(f'{database_path}/')
+    db_name_ = os.listdir(f'{database_path}/')
+    db_name = [f for f in db_name_  if not f == '.DS_Store']
     st.write('菌株を選択してください')
     select_db_name = st.selectbox('', db_name)
+    db_types_ = os.listdir(f'{database_path}/{select_db_name}')
+    db_types = [f for f in db_types_ if not f == '.DS_Store']
+    st.write('データベースの種類を選択してください')
+    select_db_type = st.radio('', db_types,horizontal=True)
+
     #database path
-    db_path = f'{database_path}/{select_db_name}/genome/gene'
+    db_path = f'{database_path}/{select_db_name}/{select_db_type}/gene'
         
     #検索方式の設定
     st.subheader('(3)パラメーター設定')
@@ -510,6 +546,10 @@ def primer():
         st.dataframe(df2)
         df2.to_excel(buf := BytesIO(), index=True)
         st.download_button("Download",buf.getvalue(),f"{fname}.xlsx","application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
-    
+
+        # 検索配列の除去    
+        shutil.rmtree(f'{base_path}/検索配列')   
+        os.makedirs(f'{base_path}/検索配列')  
+
 if __name__ == "__main__":
     main()

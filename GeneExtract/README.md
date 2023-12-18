@@ -12,7 +12,7 @@
 
 streamlitを起動すると下図の画面が立ち上がる
 
-![画面](./File/stremlit.png)
+![画面](./File/streamlit.png)
 
 
 (1) ゲノムデータ登録・確認（初回のみ）

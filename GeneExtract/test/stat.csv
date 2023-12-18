@@ -1,0 +1,2 @@
+file	format	type	num_seqs	sum_len	min_len	avg_len	max_len
+/Users/seika/Desktop/Biotools/GeneExtract/test/fo888.fasta	FASTA	DNA	352	33812624	78	96058.6	918632

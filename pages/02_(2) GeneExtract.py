@@ -111,7 +111,7 @@ def extract_locas():
     st.header('ゲノム上の位置情報から遺伝子抽出')  
     st.subheader('(1)ゲノムの選択')
     genome_list_ = os.listdir(f'{base_path2}/') 
-    genome_list = [i for i in genome_list_ if not i == 'File']  
+    genome_list = [i for i in genome_list_ if not i == 'README.md' and not i == 'File' and not i == '.DS_Store']  
     select_genome = st.radio('_',genome_list)  
     st.subheader('(2)位置情報の入力')
     chrom_list = pd.read_csv(f'{base_path2}/{select_genome}/id_list.csv',sep = '\t',header=None)
@@ -141,7 +141,7 @@ def extract_id():
     st.header('Gene_idから遺伝子抽出')
     st.subheader('(1)ゲノムの選択')
     genome_list_ = os.listdir(f'{base_path2}/') 
-    genome_list = [i for i in genome_list_ if not i == 'File']   
+    genome_list = [i for i in genome_list_ if not i == 'README.md' and not i == 'File' and not i == '.DS_Store']   
     select_genome = st.radio('_',genome_list)    
     st.subheader('(2)抽出領域の入力')      
     gene_list_p = pd.read_csv(f'{base_path2}/{select_genome}/list/gene_id_list.csv',sep = '\t',header=None)
@@ -220,7 +220,7 @@ def promorter_extract():
     st.header('プロモーター・末端領域の抽出')
     st.subheader('(1)ゲノムの選択')
     genome_list_ = os.listdir(f'{base_path2}/') 
-    genome_list = [i for i in genome_list_ if not i == 'File']    
+    genome_list = [i for i in genome_list_ if not i == 'README.md' and not i == 'File' and not i == '.DS_Store']    
     select_genome = st.radio('_',genome_list)
     add_gene_num = st.number_input('抽出範囲',5)    
     
